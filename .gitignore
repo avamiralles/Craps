@@ -2,3 +2,5 @@
 *.class
 package.BlueJ
 .DS_Store
+.ignore
+nano.save
