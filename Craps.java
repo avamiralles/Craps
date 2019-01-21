@@ -31,7 +31,7 @@ public class Craps
     }
 
     /**
-     * This doesn't work like I want it to, so I've commented out the gambling sections of the program.
+     * Asks if the player would like to gamble
      * 
      * @return whether or not the player wants to gamble
      */
@@ -78,7 +78,7 @@ public class Craps
         while (wannaPlay())
         {
             gambler = false;
-            System.out.println("Let's play craps!");
+            System.out.println("\nLet's play craps!");
             System.out.println("Do you need instructions? (y/n)");
             if (in.nextLine().equalsIgnoreCase("n"))
             {
@@ -86,22 +86,21 @@ public class Craps
             }
             else
             {
-                giveInstructions();
+                giveInstructions(); //prints instructions
             }
             
-            if (wannaGamble())
+            if (wannaGamble()) //will ask if they want to gamble and return true or false
             {
-                gambler = true;
+                gambler = true; //are they a gambler or not?
                 System.out.println("Double or nothing. How much do you want to risk? (enter a number)");
-                bet = in.nextInt();
-                if (in.nextLine().equals(""))
+                bet = in.nextInt(); //this is the money they bet
+                if (in.nextLine().equals("")) //if i don't have this, then it assumes the
+                //enter is for the first roll and this all gets very complicated
                 {
                     System.out.println("Sounds good!");
                 }
             }
             
-
-            //int bet = in.nextInt();
             System.out.println("\nGood luck!\n");
             System.out.println("Press <Enter> to roll the dice...");
             int[] rolls = dice.rollEm(); //rolls the dice
@@ -114,9 +113,9 @@ public class Craps
             {
                 System.out.println("You win! :)");
                 win = true; //they won
-                if (gambler)
+                if (gambler) //will only print this if they wanted to gamble
                 {
-                    System.out.println("You won $" + (bet * 2) + "!!!!!");
+                    System.out.println("You won $" + (bet * 2) + "!!!!!"); //returns the bet doubled!
                 }
             }
             else if (point == 2 || point == 3 || point == 12)
@@ -125,22 +124,23 @@ public class Craps
                 win = false; //they lost
                 if (gambler)
                 {
-                    System.out.println("You get $0.");
+                    System.out.println("You get $0."); //they get nothing
                 }
             }
-            else
+            else //this is what happens if the player rolls a 4, 5, 6, 8, 9, or 10
             {
-                win = false;
+                win = false; //they haven't won yet
                 //if they roll something else, it will enter a loop until they roll their point or a 7
                 System.out.println("That's your point.");
                 System.out.println("If you can roll it again before rolling a 7, you win!");
-                while (!win)
+                while (!win) //makes it so that until there's a conclusion (win or lose) they can keep rolling
                 {
                     System.out.println("Press <Enter> to roll the dice...");
                     int[] roll2 = dice.rollEm();
                     if (in.nextLine().equals(""))
                     {
                         System.out.println("You rolled: " + roll2[0] + " and " + roll2[1]);
+                        //prints their new rolls
                     }
                     if ((roll2[0] + roll2[1]) == 7)
                     {
@@ -149,7 +149,7 @@ public class Craps
                         {
                             System.out.println("You get $0.");
                         }
-                        win = true; //they lost, but this will end the loop
+                        win = true; //technically they lost, but this will end the loop
                     }
                     else if ((roll2[0] + roll2[1]) == point)
                     {
@@ -163,6 +163,6 @@ public class Craps
                 }
             }
         }
-        System.out.println("Thanks for playing!");
+        System.out.println("Have a nice day!"); //end of program! phew :)
     }
 }
