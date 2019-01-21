@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Craps
 {
     /**
+     * Asks the player if they would like to play
      * 
+     * @return if the person would like to play
      */
     public static boolean wannaPlay()
     {
@@ -28,6 +30,31 @@ public class Craps
         }
     }
 
+    /**
+     * This doesn't work like I want it to, so I've commented out the gambling sections of the program.
+     * 
+     * @return whether or not the player wants to gamble
+     */
+    public static boolean wannaGamble()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Shall we make this a little more interesting ($$$) ? (y/n)");
+        String result = in.nextLine();
+        if (result.equals("") || result.substring(0,1).equalsIgnoreCase("y"))
+        {
+            //wannagGamble is true if player wishes to bet
+            return true;
+        }
+        else 
+        {
+            //if this is false, the player does not want to bet
+            return false;
+        }
+    }
+    
+    /**
+     * Gives the instructions for craps
+     */
     public static void giveInstructions()
     {
         //these are the instructions for craps that you gave in the sample interactions :)
@@ -45,8 +72,12 @@ public class Craps
         Scanner in = new Scanner(System.in);
         Dice dice = new Dice(); //these are the dice the person will use the whole time
         boolean win = false; 
+        boolean gambler = false;
+        //boolean gamble = false;
+        int bet = 0;
         while (wannaPlay())
         {
+            gambler = false;
             System.out.println("Let's play craps!");
             System.out.println("Do you need instructions? (y/n)");
             if (in.nextLine().equalsIgnoreCase("n"))
@@ -57,6 +88,20 @@ public class Craps
             {
                 giveInstructions();
             }
+            
+            if (wannaGamble())
+            {
+                gambler = true;
+                System.out.println("Double or nothing. How much do you want to risk? (enter a number)");
+                bet = in.nextInt();
+                if (in.nextLine().equals(""))
+                {
+                    System.out.println("Sounds good!");
+                }
+            }
+            
+
+            //int bet = in.nextInt();
             System.out.println("\nGood luck!\n");
             System.out.println("Press <Enter> to roll the dice...");
             int[] rolls = dice.rollEm(); //rolls the dice
@@ -69,11 +114,19 @@ public class Craps
             {
                 System.out.println("You win! :)");
                 win = true; //they won
+                if (gambler)
+                {
+                    System.out.println("You won $" + (bet * 2) + "!!!!!");
+                }
             }
             else if (point == 2 || point == 3 || point == 12)
             {
                 System.out.println("You lose. Sorry!");
                 win = false; //they lost
+                if (gambler)
+                {
+                    System.out.println("You get $0.");
+                }
             }
             else
             {
@@ -92,11 +145,19 @@ public class Craps
                     if ((roll2[0] + roll2[1]) == 7)
                     {
                         System.out.println("Sorry, you lose.");
+                        if (gambler)
+                        {
+                            System.out.println("You get $0.");
+                        }
                         win = true; //they lost, but this will end the loop
                     }
                     else if ((roll2[0] + roll2[1]) == point)
                     {
                         System.out.println("You win! :)");
+                        if (gambler)
+                        {
+                            System.out.println("You won $" + (bet * 2) + "!!!!!");
+                        }
                         win = true; // they won
                     }
                 }

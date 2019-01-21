@@ -1,6 +1,6 @@
 
 /**
- * Adds a gambling aspect to the craps game
+ * Adds a gambling aspect to the craps game, but I did not end up using this class.
  *
  * @author Ava Miralles
  * @version 01-20-2019
