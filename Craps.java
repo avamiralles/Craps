@@ -51,7 +51,7 @@ public class Craps
             return false;
         }
     }
-    
+
     /**
      * Gives the instructions for craps
      */
@@ -88,7 +88,7 @@ public class Craps
             {
                 giveInstructions(); //prints instructions
             }
-            
+
             if (wannaGamble()) //will ask if they want to gamble and return true or false
             {
                 gambler = true; //are they a gambler or not?
@@ -100,14 +100,16 @@ public class Craps
                     System.out.println("Sounds good!");
                 }
             }
-            
+
             System.out.println("\nGood luck!\n");
             System.out.println("Press <Enter> to roll the dice...");
             int[] rolls = dice.rollEm(); //rolls the dice
+            String[] rollvis = dice.showEm();
             if (in.nextLine().equals(""))
             {
                 System.out.println("You rolled: " + rolls[0] + " and " + rolls[1]);
             }
+            System.out.println(rollvis[0] + rollvis[1]);
             int point = rolls[0] + rolls[1]; //this makes the if/else statements shorter
             if (point == 7 || point == 11)
             {
@@ -131,17 +133,19 @@ public class Craps
             {
                 win = false; //they haven't won yet
                 //if they roll something else, it will enter a loop until they roll their point or a 7
-                System.out.println("That's your point.");
+                System.out.println("Your point is " + point + ".");
                 System.out.println("If you can roll it again before rolling a 7, you win!");
                 while (!win) //makes it so that until there's a conclusion (win or lose) they can keep rolling
                 {
                     System.out.println("Press <Enter> to roll the dice...");
                     int[] roll2 = dice.rollEm();
+                    String[] rollvis2 = dice.showEm();
                     if (in.nextLine().equals(""))
                     {
                         System.out.println("You rolled: " + roll2[0] + " and " + roll2[1]);
                         //prints their new rolls
                     }
+                    System.out.println(rollvis2[0] + rollvis2[1]);
                     if ((roll2[0] + roll2[1]) == 7)
                     {
                         System.out.println("Sorry, you lose.");
@@ -159,7 +163,7 @@ public class Craps
                             System.out.println("You won $" + (bet * 2) + "!!!!!");
                         }
                         win = true; // they won
-                    }
+                    }   
                 }
             }
         }

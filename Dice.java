@@ -17,6 +17,7 @@ public class Dice
     {
         // initialise instance variables
         int[] rolls = new int[2];
+        String[] rollvis = new String[2];
         d1 = new Die();
         d2 = new Die();
     }
@@ -24,11 +25,21 @@ public class Dice
     /**
      * Rolls two dice.
      *
-     * @return    the sum of rolling two dice
+     * @return    the two rolls from the two dice
      */
     public int[] rollEm()
     {
         int[] rolls = {d1.roll(), d2.roll()};
         return rolls;
+    }
+    /**
+     * Shows the dice.
+     * 
+     * @return a drawing of the two dice rolls
+     */
+    public String[] showEm()
+    {
+        String[] rollvis = {d1.toString(), d2.toString()};
+        return rollvis;
     }
 }
